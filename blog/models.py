@@ -12,23 +12,33 @@ class Category(models.Model):
     #cid->auto created by django, pk
     name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name[:20].encode('utf8')
+
 
 class Tag(models.Model):
     #tid->auto created by django, pk
     name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name[:20].encode('utf8')
 
 
 class Article(models.Model):
     #aid->auto created by django, pk
     title = models.CharField(max_length=50)
     body = models.TextField()
-    create_time = models.DateField()
-    modified_time = models.DateField()
+    create_time = models.DateTimeField(auto_now_add=True)
     excerpt = models.CharField(max_length=200, blank=True)
 
-    author = models.ForeignKey(User)#edit by django
+    author = models.CharField(max_length=20, blank=True)
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
+
+    def __str__(self):
+        return self.title[:20].encode('utf8')
+
+
 
 
 

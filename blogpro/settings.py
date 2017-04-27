@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'comment',
 ]
 
 MIDDLEWARE = [
@@ -88,8 +89,8 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'p',
         'HOST': '127.0.0.1',
-        'PORT': '3306'
-
+        'PORT': '3306',
+        'TEST_CHARSET': 'utf8'
     }
 }
 

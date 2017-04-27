@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-
 # Create your views here.
-
+from comment import forms
 from django.shortcuts import render
-from .models import Article
-from .models import Category
-from .models import Tag
-from django.http import HttpResponse
+import codecs
+import markdown
 
 
 def findByTag(request):
@@ -27,10 +23,13 @@ def articlePage(request):
     al = [getTestarticleList()[pk]]
     cl = getTestCategoryList()
     tl = getTestTagList()
+
     return render(request, 'article-body.html', context={'title': "X's Blog",
                                                   'category_list': cl,
                                                   'tag_list': tl,
-                                                  'article_list': al})
+                                                  'article_list': al,
+                                                   'form': forms.CommentForm(),
+                                                         })
 
 
 def findByCategory(request):
@@ -94,7 +93,15 @@ def getTestarticleList():
                        '长一点再长一点长一点再长一点长一点再长一点长一点再' \
                        '长一点长一点再长一点长一点再长一点长一点再长一点'
     article1.link = '/article/'+str(article1.pk)
-    article1.body = '内容'
+    file = codecs.open('blog/test.md', 'r', encoding='utf-8')
+    s = file.read()
+
+    s = markdown.markdown(s, extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+    ])
+    article1.body = s
     article2 = A()
     article2.pk = 2
     article2.title = '第二篇文章的标题'
