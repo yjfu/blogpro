@@ -19,7 +19,6 @@ from blog import views as bviews
 from comment import views as cviews
 from django.conf.urls import url, include
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('comment.urls')),

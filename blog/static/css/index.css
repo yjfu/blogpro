@@ -1,0 +1,162 @@
+/*html{*/
+    /*font-family: 'Ubuntu',sans-serif;*/
+/*}*/
+
+body{
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace, STHeiti;
+}
+
+span.about{
+    color:rgb(51,122,183);
+}
+
+a.side-list-title:hover{
+    background-color:rgb(200,200,200)
+}
+
+a.side-list-title{
+    background-color:rgb(200,200,200)
+}
+
+h4.side-list-item{
+    margin:2px 0 0 2px
+}
+
+form.tags-form{
+    line-height:26px
+}
+
+span.tags-span{
+    margin:2px 2px 2px 2px
+}
+
+input.tags-checkbox{
+    display:none;
+}
+
+button.tags-submit{
+    margin:20px 2px 2px 2px;
+}
+
+article{
+    border-bottom:1px solid rgb(200,200,200);
+    margin:5% 0 5% 0
+}
+
+p{
+    font-size:1.3em;
+    text-indent:2em;
+    margin:0 5% 0 5%
+}
+
+
+a:hover, a:focus {
+	text-decoration: none;
+	color: #000;
+}
+
+.read-more {
+	font-family: inherit;
+	font-weight: 400;
+	word-spacing: 1px;
+	letter-spacing: 0.01em;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.cl-effect-14 a {
+	padding: 0 20px;
+    color: #555555;
+	height: 40px;
+	line-height: 40px;
+	position: relative;
+	display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 40px;
+	letter-spacing: 1px;
+	font-weight: 400;
+    font-size: 18px;
+	text-shadow: 0 0 1px rgba(255,255,255,0.3);
+}
+
+.cl-effect-14 a::before,
+.cl-effect-14 a::after {
+	position: absolute;
+	width: 40px;
+	height: 1px;
+	background: #C3C3C3;
+	content: '';
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	pointer-events: none;
+}
+
+.cl-effect-14 a::before {
+	top: 0;
+	left: 0;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+.cl-effect-14 a::after {
+	right: 0;
+	bottom: 0;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform-origin: 100% 0;
+	-moz-transform-origin: 100% 0;
+	transform-origin: 100% 0;
+}
+
+.cl-effect-14 a:hover::before,
+.cl-effect-14 a:hover::after,
+.cl-effect-14 a:focus::before,
+.cl-effect-14 a:focus::after {
+	background: #000;
+}
+
+.cl-effect-14 a:hover::before,
+.cl-effect-14 a:focus::before {
+	left: 50%;
+	-webkit-transform: rotate(0deg) translateX(-50%);
+	-moz-transform: rotate(0deg) translateX(-50%);
+	transform: rotate(0deg) translateX(-50%);
+}
+
+.cl-effect-14 a:hover::after,
+.cl-effect-14 a:focus::after {
+	right: 50%;
+	-webkit-transform: rotate(0deg) translateX(50%);
+	-moz-transform: rotate(0deg) translateX(50%);
+	transform: rotate(0deg) translateX(50%);
+}
+
+.entry-title a{
+    color: #000000;
+}
+
+.entry-title{
+    margin-top:60px;
+    margin-bottom:5px;
+}
+
+.entry-meta{
+    margin-bottom: 40px;
+}
+
+.entry-title a:hover{
+    color: #555555;
+    font-weight: 100;
+}
+
+.entry-meta span{
+    color: #737373;
+}
+
+

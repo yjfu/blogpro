@@ -1,231 +1,195 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{title}}</title>
-		<meta charset='utf-8'>
-		<meta name='viewport' content='width=device-width, initial-scale=1'>
-		{% load static %}
-		<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet'>
-		<link rel="stylesheet" href="{% static 'css/friendly.css' %}">
-   		<script src='http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js'></script>
-		<script src="{% static 'js/bootstrap.min.js' %}"></script>
-		<style type="text/css">
-			p{
-				word-wrap:break-word;
-			}
-			div.read-more{
-				border-left:1px solid rgb(0,0,0);
-				border-right:1px solid rgb(0,0,0);
-				margin:3% 35% 3% 35%;
-				font-size:1.3em
-			}
-			div.read-more:hover{
-				border-right:0px solid rgb(0,0,0);
-				border-left:0px solid rgb(0,0,0);
-				border-bottom:1px solid rgb(0,0,0);
-				border-top:1px solid rgb(0,0,0);
-			}
-			span.about{color:rgb(51,122,183);}
-			a.side-list-title:hover{
-				background-color:rgb(200,200,200)
-			}	
-			a.side-list-title{
-				background-color:rgb(200,200,200)
-			}
-			h4.side-list-item{
-				margin:2px 0 0 2px
-			}		
-			form.tags-form{
-				line-height:26px
-			}		
-			span.tags-span{
-				margin:2px 2px 2px 2px
-			}				
-			input.tags-checkbox{
-				display:none;
-			}
-			button.tags-submit{
-				margin:20px 2px 2px 2px;
-			}
-			article{
-				margin:5% 0 5% 0
-			}
-			p{
-				font-size:1.3em;
-				text-indent:2em;
-				margin:0 5% 0 5%
-			}
-		</style>
-	</head>
-	<body>
-		<div class='container'>
-			<div class='row'>
-				<header>
-					<div class='logo'>
-						<h1>X的博客</h1>
-					</div>	
-				</header>
-			</div>
-			<!--以上为logo-->
-			<div class='row'>
-				<nav class='navbar navbar-default'>
-					<div class='container-fluid'>
-						<div class='navbar-header'>
-							<button type='button' class='navbar-toggle pull-right' data-toggle='collapse' data-target='#nav-collapse'>
-								<span class='icon-bar'></span>
-								<span class='icon-bar'></span>
-								<span class='icon-bar'></span>
-							</button>
-							<div class='col-xs-6 col-sm-6 col-lg-6 navbar-left'>
-								<a class=' navbar-brand' href='index.html'>MYBLOG</a>
-							</div>
-						</div>
-						<div class='collapse navbar-collapse pull-right' id='nav-collapse'>
-							<ul class='nav navbar-nav'>
-								<li><a href='t.html'>HOME</a></li>
-								<li><a href='untitle.html'>ABOUT</a></li>
-								<li><a href='#'>CONTACT</a></li>
-								<li>
-									<form class='navbar-form navbar-left' method="get" action="/keyWord/" role='search'>
-           								<div class='form-group'>
-                							<input type='text' class='form-control' placeholder='Search'>
-            							</div>
-            							<button type='submit' class='btn btn-primary'>
-            								<a href='#'>
-          										<span class='glyphicon glyphicon-search' style='color:white'></span>
-        									</a>
-        								</button>
-        							</form>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
-		<!--以上为上部导航-->
-		<div class='container'>
-			<!--主体-->
-			<div class='row'>
-				<aside class='col-md-3'>
-					<div class='list-group'>
-						<a class='list-group-item side-list-title'>
-							<h3 align='center' class='list-group-item-heading'>
-								<span class='glyphicon glyphicon-leaf'></span>
-								文章类型
-							</h3>
-						</a>
-						{% for category in category_list %}
-						<a href='{{category.link}}' class='list-group-item'>
-							<h4 align='center' class='side-list-item' >
-								{{category.name}}
-								<span class='glyphicon glyphicon-chevron-right'></span>
-							</h4>
-						</a>
-						{% endfor %}
-					</div>
-					<div class='list-group'>
-						<a class='list-group-item side-list-title'>
-							<h3 align='center' class='list-group-item-heading'>
-								<span class='glyphicon glyphicon-tags'></span>
-								文章标签
-							</h3>
-						</a>
-						<form class='list-group-item tags-form' method="get" action="/tag/" align='center'>
-							<fieldset>
-								{% for tag in tag_list %}
-								<span class='label label-danger tags-span' onclick='chose()' id='{{tag.id}}'>
+<head>
+    <title>{{title}}</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    {% load static %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/friendly.css' %}">
+    <link rel="stylesheet" href="{%static 'css/index.css' %}">
+    <link rel="stylesheet" href="{%static 'css/article-body.css'%}">
+    <script src='http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<div class='container'>
+    <div class='row'>
+        <header>
+            <div class='logo'>
+                <h1>X的博客</h1>
+            </div>
+        </header>
+    </div>
+    <!--以上为logo-->
+    <div class='row'>
+        <nav class='navbar navbar-default'>
+            <div class='container-fluid'>
+                <div class='navbar-header'>
+                    <button type='button' class='navbar-toggle pull-right' data-toggle='collapse'
+                            data-target='#nav-collapse'>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
+                        <span class='icon-bar'></span>
+                    </button>
+                    <div class='col-xs-6 col-sm-6 col-lg-6 navbar-left'>
+                        <a class=' navbar-brand' href='index.html'>MYBLOG</a>
+                    </div>
+                </div>
+                <div class='collapse navbar-collapse pull-right' id='nav-collapse'>
+                    <ul class='nav navbar-nav'>
+                        <li><a href='t.html'>HOME</a></li>
+                        <li><a href='untitle.html'>ABOUT</a></li>
+                        <li><a href='#'>CONTACT</a></li>
+                        <li>
+                            <form class='navbar-form navbar-left' method="get" action="/keyWord/" role='search'>
+                                <div class='form-group'>
+                                    <input type='text' class='form-control' placeholder='Search'>
+                                </div>
+                                <button type='submit' class='btn btn-primary'>
+                                    <a href='#'>
+                                        <span class='glyphicon glyphicon-search' style='color:white'></span>
+                                    </a>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!--以上为上部导航-->
+<div class='container'>
+    <!--主体-->
+    <div class='row'>
+        <aside class='col-md-3'>
+            <div class='list-group'>
+                <a class='list-group-item side-list-title'>
+                    <h3 align='center' class='list-group-item-heading'>
+                        <span class='glyphicon glyphicon-leaf'></span>
+                        文章类型
+                    </h3>
+                </a>
+                {% for category in category_list %}
+                <a href='{{category.link}}' class='list-group-item'>
+                    <h4 align='center' class='side-list-item'>
+                        {{category.name}}
+                        <span class='glyphicon glyphicon-chevron-right'></span>
+                    </h4>
+                </a>
+                {% endfor %}
+            </div>
+            <div class='list-group'>
+                <a class='list-group-item side-list-title'>
+                    <h3 align='center' class='list-group-item-heading'>
+                        <span class='glyphicon glyphicon-tags'></span>
+                        文章标签
+                    </h3>
+                </a>
+                <form class='list-group-item tags-form' method="get" action="/tag/" align='center'>
+                    <fieldset>
+                        {% for tag in tag_list %}
+                        <span class='label label-danger tags-span' onclick='chose()' id='{{tag.id}}'>
 									<input class='tags-checkbox' type='checkbox' name='{{tag.id}}' id='{{tag.id}}-c'>{{tag.name}}</input>
 								</span>
-								{% endfor %}
-							</fieldset>
-							<fieldset>
-								<button type='submit' class='btn btn-primary tags-submit'>
-            					<a href='#'  style='color:white'>
-            						筛选
-          							<span class='glyphicon glyphicon-search' ></span>
-        						</a>
-        					</button>
-							</fieldset>
-						</form>
-					</div>
-				</aside>
-				<main class='col-md-9'>
-					{% for article in article_list %}
-					<article class='post post-1'>
-						<header class='entry-header'>
-							<h1 class='entry-title' align='center'>
-								<a href='{{article.link}}'>{{article.title}}</a>
-							</h1>
-							<div class='entry-meta' align='center'>
-								<span class='post-category about'>{{article.category}}</span>
-			
-								<span class='post-date about'><time class='entry-date'>{{article.create_date}}</time></span>
-			
-								<span class='post-author about'>{{article.author}}</span>
-								<span class='comments-link about'>4 Comments</span>
-							</div>
-						</header>
-						<div class='entry-content clearfix'>
-							<div style='font-size:1.3em;text-indent:2em;margin:0 5% 0 5%' >
-								{{article.body|safe}}
-							</div>
-						</div>
-						<form action="{% url 'comment:articleComment' article.pk %}" method="post" class="comment-form">
-  							{% csrf_token %}
-  							<div class="row">
-  							  <div class="col-md-4">
-  							    <label for="{{ form.name.id_for_label }}">Name:</label>
-  							    {{ form.name }}
-  							    {{ form.name.errors }}
-  							  </div>
-  							  <div class="col-md-4">
-  							    <label for="{{ form.email.id_for_label }}">Email:</label>
-  							    {{ form.email }}
-  							    {{ form.name.errors }}
-  							  </div>
-  							  <div class="col-md-4">
-  							    <label for="{{ form.url.id_for_label }}">Url:</label>
-  							    {{ form.url }}
-  							    {{ form.url.errors }}
-  							  </div>
-  							  <div class="col-md-12">
-  							    <label for="{{ form.text.id_for_label }}">Comment:</label>
-  							    {{ form.text }}
-  							    {{ form.text.errors }}
-  							    <button type="submit"><span>发表</span></button>
-  							  </div>
-  							</div>    <!-- row -->
-						</form>
-					</article>
-					{% empty %}
-					<div class="no-post">文章丢失！</div>
-					{% endfor %}
-				</main>
-			</div>
-		</div>
-	</body>
+                        {% endfor %}
+                    </fieldset>
+                    <fieldset>
+                        <button type='submit' class='btn btn-primary tags-submit'>
+                            <a href='#' style='color:white'>
+                                筛选
+                                <span class='glyphicon glyphicon-search'></span>
+                            </a>
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </aside>
+        <main class='col-md-9'>
+            {% for article in article_list %}
+            <article class='post post-1'>
+                <header class='entry-header'>
+                    <h1 class='entry-title' align='center'>
+                        <a href='{{article.link}}'>{{article.title}}</a>
+                    </h1>
+                    <div class='entry-meta' align='center'>
+                        <span class='post-category about'>{{article.category}}</span>
+
+                        <span class='post-date about'><time class='entry-date'>{{article.create_date}}</time></span>
+
+                        <span class='post-author about'>{{article.author}}</span>
+                        <span class='comments-link about'>4 Comments</span>
+                    </div>
+                </header>
+                <div class='entry-content clearfix'>
+                    <div style='font-size:1.3em;text-indent:2em;margin:0 5% 0 5%'>
+                        {{article.body|safe}}
+                    </div>
+                </div>
+                <br>
+                <br>
+            </article>
+
+            <div id="comment-list" class="comment-list">
+                {%for comment in comment_list%}
+                <a class="id">{{ comment.name }}</a>
+                <a class="time">{{ comment.created_time }}</a>
+                <a class="email">{{ comment.email }}</a>
+                <a class="content">{{ comment.text }}</a>
+                {% endfor %}
+            </div>
+
+            <form action="{% url 'comment:articleComment' article.pk %}" method="post" class="basic-grey">
+                {% csrf_token %}
+                <h1>回复栏</h1>
+                <label for="{{ form.name.id_for_label }}">
+                    <span class="narrow-span">昵称：</span>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </label>
+                <label>
+                    <span class="narrow-span">邮箱：</span>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </label>
+                <label>
+                    <span class="long-span">消息：</span>
+                    {{ form.text }}
+                    {{ form.text.errors }}
+                </label>
+                <label>
+                    <span>&nbsp;</span>
+                    <button type="submit" class="button">Send</button>
+                </label>
+            </form>
+            {% empty %}
+            <div class="no-post">文章丢失！</div>
+            {% endfor %}
+        </main>
+    </div>
+</div>
+</body>
 <script>
     <!-- js监测checkbox是否被选中 -->
-    function chose(){
-    	var obj=event.srcElement;
-    	var t=$('#'+obj.id);
-    	var c=$('#'+obj.id+'-c');
-    	if(!c.prop('checked')){
-    		t.removeClass('label-danger');
-    		t.addClass('label-success');
-    		c.prop('checked',true);
-    	}
-    	else{
+    function chose() {
+        var obj = event.srcElement;
+        var t = $('#' + obj.id);
+        var c = $('#' + obj.id + '-c');
+        if (!c.prop('checked')) {
+            t.removeClass('label-danger');
+            t.addClass('label-success');
+            c.prop('checked', true);
+        }
+        else {
 
-    		t.removeClass('label-success');
-    		t.addClass('label-danger');
-    		c.prop('checked',false);
-    	}
-    	
+            t.removeClass('label-success');
+            t.addClass('label-danger');
+            c.prop('checked', false);
+        }
+
     }
-    function checkbox()
-    {
+    function checkbox() {
         var box1 = document.getElementById('checkbox1');
         var box2 = document.getElementById('checkbox2');
         var box3 = document.getElementById('checkbox3');

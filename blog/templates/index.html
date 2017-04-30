@@ -6,54 +6,9 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		{% load static %}
 		<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet'>
+		<link rel="stylesheet" href="{% static 'css/index.css' %}">
    		<script src='http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>
-		<style type="text/css">
-			div.read-more{
-				border-left:1px solid rgb(0,0,0);
-				border-right:1px solid rgb(0,0,0);
-				margin:3% 35% 3% 35%;
-				font-size:1.3em
-			}
-			div.read-more:hover{
-				border-right:0px solid rgb(0,0,0);
-				border-left:0px solid rgb(0,0,0);
-				border-bottom:1px solid rgb(0,0,0);
-				border-top:1px solid rgb(0,0,0);
-			}
-			span.about{color:rgb(51,122,183);}
-			a.side-list-title:hover{
-				background-color:rgb(200,200,200)
-			}	
-			a.side-list-title{
-				background-color:rgb(200,200,200)
-			}
-			h4.side-list-item{
-				margin:2px 0 0 2px
-			}		
-			form.tags-form{
-				line-height:26px
-			}		
-			span.tags-span{
-				margin:2px 2px 2px 2px
-			}				
-			input.tags-checkbox{
-				display:none;
-			}
-			button.tags-submit{
-				margin:20px 2px 2px 2px;
-			}
-			article{
-				border-bottom:2px solid rgb(200,200,200);
-				border-top:2px solid rgb(200,200,200);
-				margin:5% 0 5% 0
-			}
-			p{
-				font-size:1.3em;
-				text-indent:2em;
-				margin:0 5% 0 5%
-			}
-		</style>
 	</head>
 	<body>
 		<div class='container'>
@@ -156,11 +111,11 @@
 								<a href='{{article.link}}'>{{article.title}}</a>
 							</h1>
 							<div class='entry-meta' align='center'>
-								<span class='post-category about'>{{article.category}}</span>
+								<span class='post-category about'>{{article.category}}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
 			
-								<span class='post-date about'><time class='entry-date'>{{article.create_date}}</time></span>
+								<span class='post-date about'><time class='entry-date'>{{article.create_date}}&nbsp;&nbsp;·&nbsp;&nbsp;</time></span>
 			
-								<span class='post-author about'>{{article.author}}</span>
+								<span class='post-author about'>{{article.author}}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
 								<span class='comments-link about'>4 Comments</span>
 							</div>
 						</header>
