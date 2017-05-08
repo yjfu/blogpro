@@ -7,10 +7,42 @@
     {% load static %}
     <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'css/friendly.css' %}">
-    <link rel="stylesheet" href="{%static 'css/index.css' %}">
+    <!--<link rel="stylesheet" href="{%static 'css/index.css' %}">-->
     <link rel="stylesheet" href="{%static 'css/article-body.css'%}">
     <script src='http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("p:has(img)").css("text-align", "center");
+        });
+
+        $(document).ready(function () {
+            var imgs = $("img");
+            imgs.each(function () {
+                //alert($(".post").width());
+                //alert( $("img").width());
+                hScale = $(".post").width() / $(this).width();
+                hScale *= 0.8;
+                //alert(hScale);
+                $(this).css("margin", "auto");
+                $(this).css("width", "" + hScale * 100 + "%");
+                $(this).css("display", "block");
+
+            })
+
+        })
+
+        $(document).ready(function () {
+            pList = $("p");
+            //alert("aaa");
+            pList.each(function () {
+                $(this).css("width", "inherit");
+            })
+        })
+
+
+    </script>
 </head>
 <body>
 <div class='container'>
@@ -33,18 +65,18 @@
                         <span class='icon-bar'></span>
                     </button>
                     <div class='col-xs-6 col-sm-6 col-lg-6 navbar-left'>
-                        <a class=' navbar-brand' href='index.html'>MYBLOG</a>
+                        <a class=' navbar-brand' href='/'>MYBLOG</a>
                     </div>
                 </div>
                 <div class='collapse navbar-collapse pull-right' id='nav-collapse'>
                     <ul class='nav navbar-nav'>
-                        <li><a href='t.html'>HOME</a></li>
-                        <li><a href='untitle.html'>ABOUT</a></li>
+                        <li><a href='/'>HOME</a></li>
+                        <li><a href='#'>ABOUT</a></li>
                         <li><a href='#'>CONTACT</a></li>
                         <li>
                             <form class='navbar-form navbar-left' method="get" action="/keyWord/" role='search'>
                                 <div class='form-group'>
-                                    <input type='text' class='form-control' placeholder='Search'>
+                                    <input type='text' class='form-control'  name='keyWord' placeholder='Search'>
                                 </div>
                                 <button type='submit' class='btn btn-primary'>
                                     <a href='#'>
@@ -87,20 +119,20 @@
                         文章标签
                     </h3>
                 </a>
-                <form class='list-group-item tags-form' method="get" action="/tag/" align='center'>
+                <form class='list-group-item tags-form' align='center' action="/tag/" method="get">
                     <fieldset>
                         {% for tag in tag_list %}
                         <span class='label label-danger tags-span' onclick='chose()' id='{{tag.id}}'>
-									<input class='tags-checkbox' type='checkbox' name='{{tag.id}}' id='{{tag.id}}-c'>{{tag.name}}</input>
-								</span>
+                            <input class='tags-checkbox' type='checkbox' name='{{tag.id}}' id='{{tag.id}}-c'>{{tag.name}}</input>
+                        </span>
                         {% endfor %}
                     </fieldset>
                     <fieldset>
                         <button type='submit' class='btn btn-primary tags-submit'>
-                            <a href='#' style='color:white'>
+                            <span style='color:white'>
                                 筛选
-                                <span class='glyphicon glyphicon-search'></span>
-                            </a>
+                                <span class='glyphicon glyphicon-search' ></span>
+                            </span>
                         </button>
                     </fieldset>
                 </form>
@@ -108,7 +140,7 @@
         </aside>
         <main class='col-md-9'>
             {% for article in article_list %}
-            <article class='post post-1'>
+            <article class='post'>
                 <header class='entry-header'>
                     <h1 class='entry-title' align='center'>
                         <a href='{{article.link}}'>{{article.title}}</a>
@@ -116,7 +148,7 @@
                     <div class='entry-meta' align='center'>
                         <span class='post-category about'>{{article.category}}</span>
 
-                        <span class='post-date about'><time class='entry-date'>{{article.create_date}}</time></span>
+                        <span class='post-date about'><time class='entry-date'>{{article.create_time}}</time></span>
 
                         <span class='post-author about'>{{article.author}}</span>
                         <span class='comments-link about'>4 Comments</span>
@@ -131,15 +163,38 @@
                 <br>
             </article>
 
+
             <div id="comment-list" class="comment-list">
-                {%for comment in comment_list%}
-                <a class="id">{{ comment.name }}</a>
-                <a class="time">{{ comment.created_time }}</a>
-                <a class="email">{{ comment.email }}</a>
-                <a class="content">{{ comment.text }}</a>
-                {% endfor %}
+                <h1>评论</h1>
+                <ul>
+                    {%for comment in comment_list%}
+
+                    <li class="visitorInfo">
+                        <div style="display: block;">
+                            <span class="id">{{ comment.name }}</span>
+                            <span class="time">{{ comment.created_time }}</span>
+                            <span class="email">{{ comment.email }}</span>
+                        </div>
+                    </li>
+                    <script>
+                        $(document).ready(function () {
+                            $(".id").css("font-size", "25px");
+                            $(".id").css("margin", "0");
+                            $(".id").css("padding", "0");
+                            //$(".id").css("color", "#8c8c8c")
+                            $(".time").css("font-size", "5px");
+                            $(".time").css("color", "#8c8c8c");
+                            $(".email").css("font-size", "5px");
+                            $(".email").css("color", "#8c8c8c");
+
+                        });
+                    </script>
+                    <p class="content" style="font-size: 20px;color: #5e5e5e;margin-left: 1%">{{ comment.text }}</p>
+                    {% endfor %}
+                </ul>
             </div>
 
+            <hr/>
             <form action="{% url 'comment:articleComment' article.pk %}" method="post" class="basic-grey">
                 {% csrf_token %}
                 <h1>回复栏</h1>

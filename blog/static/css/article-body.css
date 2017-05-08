@@ -1,5 +1,11 @@
 /* Basic Grey */
-.basic-grey {
+body{
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace, STHeiti;
+}
+
+
+
+.basic-grey,.comment-list {
     margin-left: 5%;
     margin-right: 5%;
     max-width: 100%;
@@ -9,7 +15,15 @@
     color: #0f0f0f;
 }
 
-.basic-grey h1 {
+.comment-list{
+    margin-bottom: -2%;
+}
+
+.basic-grey{
+    margin-top: 5%;
+}
+
+.basic-grey h1 ,.comment-list h1{
     font-size: 23px;
     padding: 0px 0px 0px 0px;
     display: block;
@@ -80,4 +94,88 @@
 
 .basic-grey .button:hover {
     background: #9d9d9d;
+}
+
+.entry-title a{
+    color: #000000;
+}
+
+.entry-title{
+    margin-top:60px;
+    margin-bottom:5px;
+}
+
+.entry-meta{
+    margin-bottom: 40px;
+}
+
+.entry-title a:hover{
+    color: #555555;
+    font-weight: 100;
+}
+
+.entry-meta span{
+    color: #737373;
+}
+
+input.tags-checkbox{
+    display:none;
+}
+span.about{
+    color:rgb(51,122,183);
+}
+
+a.side-list-title:hover{
+    background-color:rgb(200,200,200)
+}
+
+a.side-list-title{
+    background-color:rgb(200,200,200)
+}
+
+h4.side-list-item{
+    margin:2px 0 0 2px
+}
+
+form.tags-form{
+    line-height:26px
+}
+
+span.tags-span{
+    margin:2px 2px 2px 2px
+}
+
+button.tags-submit{
+    margin:20px 2px 2px 2px;
+}
+
+article{
+    border-bottom:1px solid rgb(200,200,200);
+    margin:5% 0 5% 0
+}
+
+.entry-title a{
+    color: #000000;
+}
+
+.entry-title{
+    margin-top:60px;
+    margin-bottom:5px;
+}
+
+.entry-meta{
+    margin-bottom: 40px;
+}
+
+.entry-title a:hover{
+    color: #555555;
+    font-weight: 100;
+}
+
+.entry-meta span{
+    color: #737373;
+}
+
+ul li{
+    list-style-type:none;
 }

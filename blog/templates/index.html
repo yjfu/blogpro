@@ -30,13 +30,13 @@
 								<span class='icon-bar'></span>
 							</button>
 							<div class='col-xs-6 col-sm-6 col-lg-6 navbar-left'>
-								<a class=' navbar-brand' href='index.html'>MYBLOG</a>
+								<a class=' navbar-brand' href='/'>MYBLOG</a>
 							</div>
 						</div>
 						<div class='collapse navbar-collapse pull-right' id='nav-collapse'>
 							<ul class='nav navbar-nav'>
-								<li><a href='t.html'>HOME</a></li>
-								<li><a href='untitle.html'>ABOUT</a></li>
+								<li><a href='/'>HOME</a></li>
+								<li><a href='#'>ABOUT</a></li>
 								<li><a href='#'>CONTACT</a></li>
 								<li>
 									<form class='navbar-form navbar-left' method="get" action="/keyWord/" role='search'>
@@ -113,10 +113,9 @@
 							<div class='entry-meta' align='center'>
 								<span class='post-category about'>{{article.category}}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
 			
-								<span class='post-date about'><time class='entry-date'>{{article.create_date}}&nbsp;&nbsp;·&nbsp;&nbsp;</time></span>
+								<span class='post-date about'><time class='entry-date'>{{article.create_time}}&nbsp;&nbsp;·&nbsp;&nbsp;</time></span>
 			
-								<span class='post-author about'>{{article.author}}&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-								<span class='comments-link about'>4 Comments</span>
+								<span class='post-author about'>{{article.author}}</span>
 							</div>
 						</header>
 						<div class='entry-content clearfix'>
